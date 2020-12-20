@@ -1,0 +1,19 @@
+- name: python3のセットアップ モジュールインストール
+  yum:
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - zlib-devel
+    - libffi-devel
+    - bzip2-devel
+    - openssl-devel
+    - ncurses-devel
+    - sqlite-devel
+    - readline-devel
+    - tk-devel
+    - gdbm-devel
+    - libuuid-devel
+    - xz-devel
+- name: python3のセットアップ
+  shell:
+    cmd: curl -O https://www.python.org/ftp/python/3.7.7/Python-3.7.7.tgz && tar xf Python-3.7.7.tgz && cd Python-3.7.7 && ./configure && make && sudo make altinstall && sudo ln -fs /usr/local/bin/python3.7 /usr/bin/python3

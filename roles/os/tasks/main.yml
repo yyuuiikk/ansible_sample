@@ -1,0 +1,23 @@
+- name: Yum latest update
+  yum:
+    name: '*' 
+    state: latest
+- name: Disable SELinux
+  selinux:
+    state: disabled
+  register: result
+- name: firewalldの無効化
+  systemd: 
+    name: firewalld
+    state: stopped
+    enabled: no
+- name: loocaleのセットアップ
+  shell:
+    cmd: localectl set-locale LANG=ja_JP.utf8
+- name: timezoneのセットアップ
+  shell:
+    cmd: timedatectl set-timezone Asia/Tokyo
+- name: groupinstall
+  yum:
+    name: "@Development tools"
+    state: present
